@@ -1,3 +1,4 @@
+from multiprocessing.connection import wait
 import socket
 import time
 import random
@@ -19,14 +20,19 @@ while(True):
     #Falta añadir el tiempo para que demore y las condiciones, hasta ahora solo recibe datos y los reenvia
     #Hay que pasar el clientMsg o añadir algo para enviar que sea la confirmacion.
     
+    ################
+
+    ##################################
     if (random.randint(1,11)<4):
-        time.sleep(10)
+        tiempo = random.randint(500,3001)*0.001
+        print(tiempo)
+        time.sleep(tiempo)   
         clientMsg = str.encode("Lost package")
         print("Lost package")
         UDPServerSocket.sendto(clientMsg, address)
         
+        
     else:
-        time.sleep(10)
         bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
         message = bytesAddressPair[0]
         address = bytesAddressPair[1]

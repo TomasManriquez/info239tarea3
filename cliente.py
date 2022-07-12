@@ -13,8 +13,9 @@ names = ["Matias","Juan","Jaime","Jose","Daniel","Sebastian","Luciana","Trinidad
 def recvfrom(message,UDPClientSocket):
     msgFromServer = UDPClientSocket.recvfrom(bufferSize)
     if ("Datagram Acepted"!=msgFromServer[0].decode()):
+        
         print("El mensaje no llego")
-        print("Intentando enviar de nuevo: "+message.decode())
+        print("Enviando de nuevo: "+message.decode())
         send_to(message.decode(),UDPClientSocket)
     else:
         print("Mensaje aceptado: "+message.decode())
@@ -24,6 +25,11 @@ def send_to(message,UDPClientSocket):
     bytesToSend = str.encode(message)  #Lo transformamos a bytes para poder enviarlo 
     #print(message)
     UDPClientSocket.sendto(bytesToSend, serverAddressPort) 
+    #flag = True
+    #while flag:
+       # time.sleep(2)
+       # UDPClientSocket.sendto(bytesToSend, serverAddressPort)
+    print(UDPClientSocket.recvfrom(bufferSize))
     recvfrom(bytesToSend,UDPClientSocket)
 
 
@@ -31,7 +37,12 @@ def send_to(message,UDPClientSocket):
 UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 message = random.choice(names)
 for i in message:
-    print("Intentando enviar: "+i)
+    
+    print("Enviando: "+i)
+    tiempo = random.randint(500,3001)*0.001
+    print(tiempo)
+    time.sleep(tiempo) 
+    
     send_to(i,UDPClientSocket)
     
 
