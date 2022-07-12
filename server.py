@@ -18,12 +18,15 @@ print("Link Available")
 while(True):
     #Falta añadir el tiempo para que demore y las condiciones, hasta ahora solo recibe datos y los reenvia
     #Hay que pasar el clientMsg o añadir algo para enviar que sea la confirmacion.
+    
     if (random.randint(1,11)<4):
+        time.sleep(10)
         clientMsg = str.encode("Lost package")
         print("Lost package")
         UDPServerSocket.sendto(clientMsg, address)
         
     else:
+        time.sleep(10)
         bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
         message = bytesAddressPair[0]
         address = bytesAddressPair[1]
@@ -32,8 +35,8 @@ while(True):
         #print("Link bussy")
         clientMsg = format(message) 
         #print(clientMsg)
-        time.sleep(3)
         # Sending a reply to client
         #print(bytesToSend.decode())
         UDPServerSocket.sendto(bytesToSend, address)
         print("Link Available")
+    
