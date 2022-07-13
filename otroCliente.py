@@ -4,7 +4,7 @@ import random
 import threading
 import time
 
-msgFromClient       ="Using Link Client 1"
+msgFromClient       ="Using Link Client 2"
 bytesToSend         = str.encode(msgFromClient)
 serverAddressPort   = ("127.0.0.1", 20001)
 bufferSize          = 1024
@@ -41,4 +41,3 @@ for i in message:
     
     send_to(i,UDPClientSocket)
     
-
